@@ -8,7 +8,6 @@ PACKAGE CONTENTS
         any associated purchases through the POS system.
 """
 from data_virtualisation.connection import Connection
-import time
 import pandas as pd
 
 
@@ -25,12 +24,13 @@ class ExampleConnection(Connection):
         super().__init__(purpose, persist_cache=True)
 
     def preview(self):
+        self.logger.debug(f'Previewing data from {type(self).__name__} for {self.purpose}')
         return pd.read_csv('ftse_250.csv', nrows=10)
 
     def fetch(self):
         if self.cache():
             return self.load_cached_data()
-        time.sleep(2)
+        self.logger.debug(f'Fetching data from {type(self).__name__} for {self.purpose}')
         data = pd.read_csv('ftse_250.csv')
         self.cache(data)
         return data  # self.validate(data)['valid']
@@ -38,7 +38,6 @@ class ExampleConnection(Connection):
 
 # This section is used for testing the example connection.
 def main():
-    start = time.time()
     data_conn = ExampleConnection(
         purpose="Creating a segmentation model."
     )
