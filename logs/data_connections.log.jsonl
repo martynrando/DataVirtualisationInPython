@@ -1,0 +1,1 @@
+{"level": "ERROR", "message": "Sorry, the validate method has not been implemented on ExampleConnection.", "timestamp": "2024-05-01T11:42:01.716417+00:00", "logger": "data_connections", "module": "connection", "function": "validate", "line": 206, "thread": "MainThread", "user": "eoinm"}
